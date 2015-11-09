@@ -46,7 +46,7 @@ HIST_STAMPS="dd-mm-yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git history-substring-search zsh-completions debian sudo autojump cp zsh-syntax-highlighting command-not-found)
+plugins=(colored-man-pages git history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found chucknorris)
 
 
 # User configuration
