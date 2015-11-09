@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/santiago/.oh-my-zsh
+export ZSH=/Users/santiago/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -47,7 +47,6 @@ HIST_STAMPS="dd-mm-yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(colored-man-pages git history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found chucknorris)
-
 
 # User configuration
 
@@ -114,6 +113,8 @@ alias -g g="| egrep --color"
 mdc () { mkdir -p "$@" && cd "$@"; }
 alias c='pygmentize -g'
 
+POWERLEVEL9K_MODE='awesome-patched'
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 ###-begin-npm-completion-###
@@ -169,3 +170,12 @@ elif type compctl &>/dev/null; then
   compctl -K _npm_completion npm
 fi
 ###-end-npm-completion-###
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+if test -f ~/.rvm/scripts/rvm; then
+   [ "$(type rvm)" = "function" ] || source ~/.rvm/scripts/rvm
+fi
+
+export NVM_DIR="/Users/santiago/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
