@@ -25,12 +25,6 @@ nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
-" Mapping for mac
-" nmap <silent> <Esc>[1;5D :wincmd h<CR>
-" nmap <silent> <Esc>[1;5C :wincmd l<CR>
-" nmap <silent> <Esc>[1;5A :wincmd k<CR>
-" nmap <silent> <Esc>[1;5B :wincmd j<CR>
-
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
@@ -102,10 +96,27 @@ Plugin 'dsawardekar/ember.vim'
 " Better javascript
 Plugin 'pangloss/vim-javascript'
 
+" Enhanced JavaScript Syntax
+Plugin 'jelera/vim-javascript-syntax'
+
 Plugin 'isRuslan/vim-es6'
 
 " Avoid close windows when delete a buffer
 Plugin 'qpkorr/vim-bufkill'
+
+" A better JSON for Vim
+Plugin 'elzr/vim-json'
+
+" great indicator for what is lined up with what
+Plugin 'nathanaelkane/vim-indent-guides'
+
+" automatically add the closing quote, bracket or any other thing
+Plugin 'Raimondi/delimitMate'
+
+" If you need linting in any language
+Plugin 'scrooloose/syntastic'
+
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -122,11 +133,15 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-filetype plugin indent on    " required
 syntax on
 
-" Set <leader> key
-let mapleader = ","     " By default is \
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
 
 " Copy and paste to system clipboards
 vmap <Leader>y "*y
@@ -139,9 +154,16 @@ vmap <Leader>P "*P
 nmap <Leader>q :BD<cr>
 nmap <Leader>t :NERDTreeToggle<cr>
 
-
 " Map code completion to leader+tab
 imap <Leader><tab> <C-x><C-o>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=700
+
+
 
 " Configure regexes to use normal ones.
 nnoremap / /\v
@@ -151,7 +173,7 @@ set ruler    " shows ROW,COL at bottom right corner
 set number   " shows line numbers
 " set nowrap " dissables linewrapping
 set background=dark " Soy Darksssss
-set guifont=Inconsolata\ for\ Powerline
+" set guifont=Inconsolata\ for\ Powerline
 
 set encoding=utf-8
 set showcmd " display incomplete commands
@@ -164,11 +186,15 @@ set smartcase
 
 " Highlight search result as I type
 set incsearch
-set showmatch
+set showmatch  " Show matching brackets
 set hlsearch
 
 " Clear current search with , + space
 nnoremap <leader><space> :nohlsearch<cr>:call clearmatches()<cr>
+
+" show current file path and name
+nnoremap <leader>c :echo expand('%:p')<cr> 
+
 
 " Faster escape settings
 imap jk <ESC>
@@ -201,6 +227,7 @@ colorscheme PaperColor
 au BufReadPost *.hbs set syntax=html
 
 " Tab settings
+" 1 tab == 4 spaces" 
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -223,12 +250,6 @@ set ttyfast
 set laststatus=2
 set relativenumber              " Relative line number from current line
 set undofile
-
-"handle long lines
-set wrap
-set textwidth=79
-set formatoptions=qrn1
-set colorcolumn=85
 
 " set mouse=a     " Enable mouse usage (all modes)
 " set smartindent " auto tab
@@ -253,3 +274,97 @@ set autoread  " read automagically from disk
 " au CursorHold * checktime
 
 let g:nerdtree_tabs_open_on_console_startup = 1
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+
+" Linebreak on 79 characters
+set lbr
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=85
+
+" Useful mappings for managing tabs
+" map <leader>tn :tabnew<cr>
+" map <leader>to :tabonly<cr>
+" map <leader>tc :tabclose<cr>
+" map <leader>tm :tabmove
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Specify the behavior when switching between buffers 
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Remember info about open buffers on close
+set viminfo^=%
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
+" Disable AutoComplPop.
+" let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
