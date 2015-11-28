@@ -14,6 +14,8 @@ nnoremap <silent> [b :bprevious<cr>
 nnoremap <silent> ]b :bnext<cr>
 nnoremap <silent> [B :bfirst<cr>
 nnoremap <silent> ]B :blast<cr>
+nnoremap <silent> <C-left> :bprevious<cr>
+nnoremap <silent> <C-right> :bnext<cr>
 
 nnoremap <silent> <S-left> :bprevious<cr>
 nnoremap <silent> <S-right> :bnext<cr>
@@ -96,6 +98,8 @@ Plugin 'pangloss/vim-javascript'
 
 Plugin 'isRuslan/vim-es6'
 
+" Avoid close windows when delete a buffer
+Plugin 'qpkorr/vim-bufkill'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -125,6 +129,10 @@ nmap <Leader>p "*p
 nmap <Leader>P "*P
 vmap <Leader>p "*p
 vmap <Leader>P "*P
+
+nmap <Leader>q :BD<cr>
+nmap <Leader>t :NERDTreeToggle<cr>
+
 
 " Map code completion to leader+tab
 imap <Leader><tab> <C-x><C-o>
@@ -183,6 +191,8 @@ colorscheme PaperColor
 " colorscheme peacock
 " syntax enable
 
+" set hbs syntax as html
+au BufReadPost *.hbs set syntax=html
 
 " Tab settings
 set tabstop=4
