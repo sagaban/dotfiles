@@ -11,11 +11,9 @@ kept there, sorry.
 
 > This is what I use when setting up a new machine after installing
 
-``bash
-# Pre-awesome Linux environment.
+```bash
 
-make
+$ make
 
-# Awesome Linux environment.
-``
-`
+```
+
