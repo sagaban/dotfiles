@@ -9,6 +9,11 @@ set nu
 " inoremap <left> <nop>
 " inoremap <right> <nop>
 
+" Set left and right option/alt keys to be meta keys
+if has("gui_macvim")
+    let macvim_skip_cmd_opt_movement = 1
+endif
+
 " Mapeo para moverme entre buffers
 nnoremap <silent> [b :bprevious<cr>
 nnoremap <silent> ]b :bnext<cr>
@@ -17,9 +22,11 @@ nnoremap <silent> ]B :blast<cr>
 nnoremap <silent> <C-left> :bprevious<cr>
 nnoremap <silent> <C-right> :bnext<cr>
 
+" Move throught buffers
 nnoremap <silent> <S-left> :bprevious<cr>
 nnoremap <silent> <S-right> :bnext<cr>
 
+" move throught panels
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
@@ -170,7 +177,14 @@ imap <Leader><tab> <C-x><C-o>
 " Sets how many lines of history VIM has to remember
 set history=700
 
-
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T
+    set guioptions+=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+    set guifont=Inconsolata\ for\ Powerline:h14
+endif
 
 " Configure regexes to use normal ones.
 nnoremap / /\v
@@ -180,7 +194,6 @@ set ruler    " shows ROW,COL at bottom right corner
 set number   " shows line numbers
 " set nowrap " dissables linewrapping
 set background=dark " Soy Darksssss
-" set guifont=Inconsolata\ for\ Powerline
 
 set encoding=utf-8
 set showcmd " display incomplete commands
