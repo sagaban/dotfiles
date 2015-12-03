@@ -25,6 +25,13 @@ nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
+if has("mac") || has("macunix")
+    nmap <silent> <Esc>[1;5D :wincmd h<CR>
+    nmap <silent> <Esc>[1;5C :wincmd l<CR>
+    nmap <silent> <Esc>[1;5A :wincmd k<CR>
+    nmap <silent> <Esc>[1;5B :wincmd j<CR>
+endif
+
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
