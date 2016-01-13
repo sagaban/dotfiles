@@ -1,0 +1,18 @@
+{
+	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+	"command": "toggle_overwrite",
+	"font_size": 15,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"keys":
+	[
+		"ctrl+alt+shift+i"
+	],
+	"quick_panel_small": true,
+	"sidebar_size_12": true,
+	"sidebar_size_13": true,
+	"tab_size": 2,
+	"theme": "Flatgrammer.sublime-theme"
+}

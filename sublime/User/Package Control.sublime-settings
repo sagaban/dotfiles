@@ -1,0 +1,40 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Alignment",
+		"All Autocomplete",
+		"auto-save",
+		"Better CoffeeScript",
+		"BracketHighlighter",
+		"Colorsublime",
+		"Compare Side-By-Side",
+		"DevDocs",
+		"EJS",
+		"Emmet",
+		"Git",
+		"GitGutter",
+		"Handlebars",
+		"HTMLBeautify",
+		"Indent XML",
+		"JavaScript & NodeJS Snippets",
+		"Javascript Beautify",
+		"JavaScript Completions",
+		"JsFormat",
+		"Markdown Preview",
+		"Node Completions",
+		"Package Control",
+		"Pretty JSON",
+		"Seti_UI",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeLinter-contrib-eslint",
+		"Theme - Afterglow",
+		"Theme - Brogrammer",
+		"Theme - Carmesim",
+		"Theme - Flatgrammer"
+	]
+}
