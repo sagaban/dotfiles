@@ -1,0 +1,29 @@
+[user]
+	name = santiago
+	email = santiago@codecantor.com
+[push]
+	default = simple
+[core]
+	excludesfile = ~/.gitignore_global 
+	editor = vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[alias]
+	lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lg3 = log --graph --full-history --all --color --pretty=format:'%x1b[31m%h%x09%x1b[32m %C(white)- %d%x1b[0m%x20%s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
+	lg4 = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	lg = !"git lg4"
+    unstage = reset HEAD --
+
+# git config --global diff.tool diffmerge
+# git config --global difftool.diffmerge.cmd 'diffmerge "$LOCAL" "$REMOTE"'
+# git config --global merge.tool diffmerge
+# git config --global mergetool.diffmerge.cmd 'diffmerge --merge
+# --result="$MERGED" "$LOCAL" "$(if test -f "$BASE"; then echo "$BASE"; else
+# echo "$LOCAL"; fi)" "$REMOTE"'
+# git config --global mergetool.diffmerge.trustExitCode true'
