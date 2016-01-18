@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+  "color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
 	"command": "toggle_overwrite",
 	"font_size": 15,
 	"ignored_packages":
