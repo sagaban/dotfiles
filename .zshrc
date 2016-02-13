@@ -46,7 +46,7 @@ HIST_STAMPS="dd-mm-yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found chucknorris)
+plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found chucknorris)
 
 # User configuration
 
@@ -109,7 +109,7 @@ source $ZSH/oh-my-zsh.sh
 		echo "'$1' is not a valid file" 
 	fi
 }
-alias -g g="| egrep --color"
+alias g="egrep --color"
 mdc () { mkdir -p "$@" && cd "$@"; }
 alias c='pygmentize -g'
 
@@ -179,3 +179,5 @@ fi
 
 export NVM_DIR="/Users/santiago/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+. /usr/local/etc/profile.d/z.sh 
