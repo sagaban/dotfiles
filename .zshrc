@@ -7,6 +7,7 @@ export ZSH=~/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="lambda-mod"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -89,6 +90,13 @@ source $ZSH/oh-my-zsh.sh
  alias fpf='readlink -e'
  alias buscar='find . | grep -i'
  alias buscarps='ps -A | grep -i'
+
+# Ember CLI
+ alias e=ember
+ alias es="ember s"
+ alias eg="ember g"
+ alias ets="ember test --server"
+ 
  extract() { 
 	if [ -f $1 ] ; then 
 		case $1 in 
