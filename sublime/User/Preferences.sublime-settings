@@ -1,18 +1,31 @@
 {
-  "color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
+	"always_show_minimap_viewport": true,
+	"bold_folder_labels": true,
+	"caret_extra_bottom": 1,
+	"caret_extra_top": 1,
+	"caret_extra_width": 1,
+	"caret_style": "blink",
+	"color_scheme": "Packages/Boxy Theme/schemes/Boxy Tomorrow.tmTheme",
 	"command": "toggle_overwrite",
-	"font_size": 15,
+	"fade_fold_buttons": false,
+	"font_size": 14,
 	"ignored_packages":
 	[
 		"Vintage"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
 	],
 	"keys":
 	[
 		"ctrl+alt+shift+i"
 	],
-	"quick_panel_small": true,
-	"sidebar_size_12": true,
-	"sidebar_size_13": true,
-	"tab_size": 2,
-	"theme": "Flatgrammer.sublime-theme"
+	"line_padding_bottom": 2,
+	"line_padding_top": 2,
+	"overlay_scroll_bars": "enabled",
+	"show_encoding": true,
+	"show_line_endings": true,
+	"theme": "Boxy Monokai.sublime-theme"
 }
