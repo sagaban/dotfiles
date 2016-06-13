@@ -40,5 +40,6 @@
 	"theme_tab_selected_transparent": true,
 	"theme_tab_selected_underlined": true,
 	"theme_tab_separator": false,
-	"word_wrap": true
+	"word_wrap": true,
+	"find_selected_text": true
 }
