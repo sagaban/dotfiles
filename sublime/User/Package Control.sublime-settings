@@ -9,14 +9,17 @@
 		"All Autocomplete",
 		"auto-save",
 		"Better CoffeeScript",
+		"Boxy Theme",
 		"BracketHighlighter",
 		"Colorsublime",
 		"Compare Side-By-Side",
 		"DevDocs",
 		"EJS",
 		"Emmet",
+		"FindSelected",
 		"Git",
 		"GitGutter",
+		"Gutter Color",
 		"Handlebars",
 		"HTMLBeautify",
 		"Indent XML",
@@ -32,9 +35,13 @@
 		"SideBarEnhancements",
 		"SublimeLinter",
 		"SublimeLinter-contrib-eslint",
+		"SublimeLinter-jscs",
+		"SublimeLinter-jshint",
 		"Theme - Afterglow",
 		"Theme - Brogrammer",
 		"Theme - Carmesim",
-		"Theme - Flatgrammer"
+		"Theme - Flatgrammer",
+		"Theme - Toxin",
+		"WordHighlight"
 	]
 }
