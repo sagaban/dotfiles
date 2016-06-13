@@ -27,5 +27,7 @@
 	"overlay_scroll_bars": "enabled",
 	"show_encoding": true,
 	"show_line_endings": true,
-	"theme": "Boxy Monokai.sublime-theme"
+	"tab_size": 2,
+	"theme": "Boxy Monokai.sublime-theme",
+	"word_wrap": true
 }

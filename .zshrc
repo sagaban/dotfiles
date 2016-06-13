@@ -6,6 +6,7 @@ export ZSH=~/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="agnoster"
+# ZSH_THEME="wild-cherry"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 # ZSH_THEME="lambda-mod"
 
@@ -47,7 +48,7 @@ HIST_STAMPS="dd-mm-yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found chucknorris)
+plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found chucknorris rails)
 
 # User configuration
 
@@ -87,9 +88,11 @@ source $ZSH/oh-my-zsh.sh
  egrep -Ri "$1" .        
  }
  alias urgar=urgarfc
- alias fpf='readlink -e'
- alias buscar='find . | grep -i'
- alias buscarps='ps -A | grep -i'
+ alias buscar='find . | egrep -i --color'
+ buscaren (){
+     find $0 | egrep -i --color $1
+ }
+ alias buscarps='ps -A | egrep -i --color'
 
 # Ember CLI
  alias e=ember
@@ -117,9 +120,12 @@ source $ZSH/oh-my-zsh.sh
 		echo "'$1' is not a valid file" 
 	fi
 }
-alias g="egrep --color"
+alias -g G="| egrep -i --color"
 mdc () { mkdir -p "$@" && cd "$@"; }
 alias c='pygmentize -g'
+#fpf () { echo `pwd`/`ls $@`}
+alias fpf='greadlink -f'
+# require: brew install coreutils
 
 POWERLEVEL9K_MODE='awesome-patched'
 
