@@ -6,9 +6,8 @@ export ZSH=~/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="agnoster"
-# ZSH_THEME="wild-cherry"
-ZSH_THEME="powerlevel9k/powerlevel9k"
-# ZSH_THEME="lambda-mod"
+ ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="muse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -48,7 +47,7 @@ HIST_STAMPS="dd-mm-yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found chucknorris rails)
+plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found chucknorris rails history k)
 
 # User configuration
 
@@ -99,6 +98,7 @@ source $ZSH/oh-my-zsh.sh
  alias es="ember s"
  alias eg="ember g"
  alias ets="ember test --server"
+ alias tree="tree -C"
  
  extract() { 
 	if [ -f $1 ] ; then 
