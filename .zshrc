@@ -14,10 +14,18 @@ export ZSH=~/.oh-my-zsh
  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
 # show the commit number
  POWERLEVEL9K_SHOW_CHANGESET=false
- POWERLEVEL9K_CUSTOM_COMMIT="echo `git rev-parse --short HEAD`"
+ POWERLEVEL9K_CUSTOM_COMMIT="zsh_show_current_commit"
  POWERLEVEL9K_CUSTOM_COMMIT_BACKGROUND="magenta"
  POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="white"
 
+ zsh_show_current_commit(){
+   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
+      echo `git rev-parse --short HEAD`
+    else
+      echo ''
+    fi
+
+}
 # ZSH_THEME="muse"
 
 # Uncomment the following line to use case-sensitive completion.
