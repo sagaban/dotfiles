@@ -7,6 +7,17 @@ export ZSH=~/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="agnoster"
  ZSH_THEME="powerlevel9k/powerlevel9k"
+ POWERLEVEL9K_MODE='awesome-patched'
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv vcs)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir rbenv vcs)
+ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
+# show the commit number
+ POWERLEVEL9K_SHOW_CHANGESET=false
+ POWERLEVEL9K_CUSTOM_COMMIT="echo `git rev-parse --short HEAD`"
+ POWERLEVEL9K_CUSTOM_COMMIT_BACKGROUND="magenta"
+ POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="white"
+
 # ZSH_THEME="muse"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -84,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
  alias wget='wget -c'
   urgarfc()
  {
- egrep -Ri "$1" .        
+ egrep -Ri "$1" .
  }
  alias urgar=urgarfc
  alias buscar='find . | egrep -i --color'
@@ -99,25 +110,25 @@ source $ZSH/oh-my-zsh.sh
  alias eg="ember g"
  alias ets="ember test --server"
  alias tree="tree -C"
- 
- extract() { 
-	if [ -f $1 ] ; then 
-		case $1 in 
+
+ extract() {
+	if [ -f $1 ] ; then
+		case $1 in
 			*.tar.bz2)   tar xjf $1     ;;
-			*.tar.gz)    tar xzf $1     ;; 
-			*.bz2)       bunzip2 $1     ;; 
-			*.rar)       unrar e $1     ;; 
-			*.gz)        gunzip $1      ;; 
-			*.tar)       tar xf $1      ;; 
-			*.tbz2)      tar xjf $1     ;; 
-			*.tgz)       tar xzf $1     ;; 
-			*.zip)       unzip $1       ;; 
-			*.Z)         uncompress $1  ;; 
-			*.7z)        7z x $1        ;; 
-			*)     echo "'$1' cannot be extracted via extract()" ;; 
-		esac 
-	else 
-		echo "'$1' is not a valid file" 
+			*.tar.gz)    tar xzf $1     ;;
+			*.bz2)       bunzip2 $1     ;;
+			*.rar)       unrar e $1     ;;
+			*.gz)        gunzip $1      ;;
+			*.tar)       tar xf $1      ;;
+			*.tbz2)      tar xjf $1     ;;
+			*.tgz)       tar xzf $1     ;;
+			*.zip)       unzip $1       ;;
+			*.Z)         uncompress $1  ;;
+			*.7z)        7z x $1        ;;
+			*)     echo "'$1' cannot be extracted via extract()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
 	fi
 }
 alias -g G="| egrep -i --color"
@@ -126,6 +137,9 @@ alias c='pygmentize -g'
 #fpf () { echo `pwd`/`ls $@`}
 alias fpf='greadlink -f'
 # require: brew install coreutils
+
+# https://github.com/supercrabtree/k
+alias ll='k'
 
 POWERLEVEL9K_MODE='awesome-patched'
 
@@ -194,4 +208,4 @@ fi
 export NVM_DIR="/Users/santiago/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-. /usr/local/etc/profile.d/z.sh 
+. /usr/local/etc/profile.d/z.sh
