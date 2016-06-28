@@ -11,6 +11,7 @@ export ZSH=~/.oh-my-zsh
 # POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv vcs)
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir rbenv vcs)
+ # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
 # show the commit number
  POWERLEVEL9K_SHOW_CHANGESET=false
@@ -19,12 +20,9 @@ export ZSH=~/.oh-my-zsh
  POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="white"
 
  zsh_show_current_commit(){
-   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-      echo `git rev-parse --short HEAD`
-    else
-      echo ''
-    fi
-
+   if [ -d .git ]; then
+      git log -1 --pretty=oneline | cut -c -8
+   fi
 }
 # ZSH_THEME="muse"
 
@@ -101,10 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
  alias ports='netstat -tulanp'
  alias wget='wget -c'
-  urgarfc()
- {
- egrep -Ri "$1" .
+
+ urgarfc() {
+    egrep -Ri "$1" .
  }
+
  alias urgar=urgarfc
  alias buscar='find . | egrep -i --color'
  buscaren (){
@@ -140,7 +139,7 @@ source $ZSH/oh-my-zsh.sh
 	fi
 }
 alias -g G="| egrep -i --color"
-mdc () { mkdir -p "$@" && cd "$@"; }
+mkcd () { mkdir -p "$@" && cd "$@"; }
 alias c='pygmentize -g'
 #fpf () { echo `pwd`/`ls $@`}
 alias fpf='greadlink -f'
@@ -149,8 +148,30 @@ alias fpf='greadlink -f'
 # https://github.com/supercrabtree/k
 alias ll='k'
 
-POWERLEVEL9K_MODE='awesome-patched'
+function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
+function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
+function myip() {
+    ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+	ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+}
 
+s() {
+   if [ -z "$1" ]; then
+      pwd > ~/.save_dir/default ;
+   else
+      pwd > ~/.save_dir/$1
+   fi
+}
+r() {
+   if [ -z "$1" ]; then
+      echo "$(cat ~/.save_dir/default)" ;
+   else
+      echo "$(cat ~/.save_dir/$1)" ;
+   fi
+}
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 ###-begin-npm-completion-###
