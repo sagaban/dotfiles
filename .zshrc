@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh installation.
+#  to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -18,9 +18,10 @@ export ZSH=~/.oh-my-zsh
  POWERLEVEL9K_CUSTOM_COMMIT="zsh_show_current_commit"
  POWERLEVEL9K_CUSTOM_COMMIT_BACKGROUND="magenta"
  POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="white"
+ # POWERLEVEL9K_COLOR_SCHEME="light"
 
  zsh_show_current_commit(){
-   if [ -d .git ]; then
+   if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1; then
       git log -1 --pretty=oneline | cut -c -8
    fi
 }
@@ -229,6 +230,8 @@ fi
 ###-end-npm-completion-###
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export PATH="$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools"
 
 if test -f ~/.rvm/scripts/rvm; then
    [ "$(type rvm)" = "function" ] || source ~/.rvm/scripts/rvm
