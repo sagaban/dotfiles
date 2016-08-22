@@ -33,6 +33,10 @@
 	"theme_accent_blue": true,
 	"theme_bar": false,
 	"theme_bar_margin_top_sm": false,
+	"theme_config_marked": "✓",
+	"theme_config_radio_marked": "☒",
+	"theme_config_radio_unmarked": "☐",
+	"theme_config_unmarked": "✗",
 	"theme_icons_materialized": false,
 	"theme_scrollbar_colored": true,
 	"theme_sidebar_file_icons_hidden": false,
@@ -43,9 +47,5 @@
 	"theme_tab_selected_transparent": true,
 	"theme_tab_selected_underlined": true,
 	"theme_tab_separator": false,
-	"word_wrap": true,
-	"theme_config_marked": "✓",
-	"theme_config_unmarked": "✗",
-	"theme_config_radio_marked": "☒",
-	"theme_config_radio_unmarked": "☐",
+	"word_wrap": true
 }
