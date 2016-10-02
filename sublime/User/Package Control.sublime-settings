@@ -11,7 +11,6 @@
 		"Better CoffeeScript",
 		"Boxy Theme",
 		"Boxy Theme Addon - Font Face",
-		"Boxy Theme Addon - Linter Theme",
 		"Boxy Theme Addon - Mono File Icons - Dark UI",
 		"Boxy Theme Addon - Mono File Icons - Light UI",
 		"BracketHighlighter",
@@ -52,5 +51,9 @@
 		"Theme - Spacegray",
 		"Theme - Toxin",
 		"WordHighlight"
+	],
+	"repositories":
+	[
+		"https://github.com/titoBouzout/SideBarEnhancements/tree/st3"
 	]
 }
