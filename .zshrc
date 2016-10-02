@@ -65,12 +65,13 @@ HIST_STAMPS="dd-mm-yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found chucknorris rails history k)
+plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found rails history k)
 
 # User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
+export PATH=~/.npm-global/bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
@@ -237,7 +238,8 @@ if test -f ~/.rvm/scripts/rvm; then
    [ "$(type rvm)" = "function" ] || source ~/.rvm/scripts/rvm
 fi
 
-export NVM_DIR="/Users/santiago/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 . /usr/local/etc/profile.d/z.sh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
