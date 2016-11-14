@@ -8,10 +8,16 @@
 	"color_scheme": "Packages/Boxy Theme/schemes/Boxy Tomorrow.tmTheme",
 	"fade_fold_buttons": false,
 	"find_selected_text": true,
+	"folder_exclude_patterns":
+	[
+		"tmp",
+		"dist",
+		"node_modules",
+		"bower_components"
+	],
 	"font_size": 14,
 	"ignored_packages":
 	[
-		"Boxy Theme Addon - Mono File Icons - Dark UI",
 		"Vintage"
 	],
 	"indent_guide_options":
