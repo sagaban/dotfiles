@@ -1,10 +1,10 @@
 [user]
-	name = santiago
+	name = Santiago Bandiera
 	email = santiagobandiera@yahoo.com.ar
 [push]
 	default = simple
 [core]
-	excludesfile = ~/.gitignore_global 
+	excludesfile = /Users/santiagobandiera/.gitignore_global
 	editor = vim
 [alias]
 	lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
@@ -41,3 +41,13 @@
 	tool = p4mergetool
 [difftool "p4mergetool"]
 	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
+[difftool "sourcetree"]
+	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/santiagobandiera/.stCommitMsg
+[init]
+	templatedir = /Users/santiagobandiera/.git_template

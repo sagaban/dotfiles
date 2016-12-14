@@ -5,27 +5,50 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="agnoster"
  ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="muse"
  POWERLEVEL9K_MODE='awesome-patched'
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv vcs)
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir rbenv vcs)
- # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
- POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 # show the commit number
  POWERLEVEL9K_SHOW_CHANGESET=false
  POWERLEVEL9K_CUSTOM_COMMIT="zsh_show_current_commit"
  POWERLEVEL9K_CUSTOM_COMMIT_BACKGROUND="magenta"
- POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="white"
+ POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="black"
  # POWERLEVEL9K_COLOR_SCHEME="light"
+ POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+
+# I make it with no background
+ POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
+ POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+ POWERLEVEL9K_OS_ICON_BACKGROUND="none"
+ POWERLEVEL9K_DIR_HOME_FOREGROUND='blue'
+ POWERLEVEL9K_DIR_HOME_BACKGROUND='none'
+ POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='blue'
+ POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='none'
+ POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='blue'
+ POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='none'
+ POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
+ POWERLEVEL9K_VCS_CLEAN_BACKGROUND='none'
+ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='yellow'
+ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='none'
+ POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
+ POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='none'
+ POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
+ POWERLEVEL9K_VCS_CLEAN_BACKGROUND='none'
+ POWERLEVEL9K_CUSTOM_COMMIT_BACKGROUND="none"
+ POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="magenta"
+ POWERLEVEL9K_NODE_VERSION_BACKGROUND="none"
+ POWERLEVEL9K_NODE_VERSION_FOREGROUND="green"
+ POWERLEVEL9K_STATUS_OK_BACKGROUND="none"
+ POWERLEVEL9K_STATUS_ERROR_BACKGROUND="none"
 
  zsh_show_current_commit(){
    if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1; then
       git log -1 --pretty=oneline | cut -c -8
    fi
 }
-# ZSH_THEME="muse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -65,7 +88,7 @@ HIST_STAMPS="dd-mm-yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo autojump cp zsh-syntax-highlighting command-not-found rails history k)
+plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo z cp zsh-syntax-highlighting command-not-found history yarn extract)
 
 # User configuration
 
@@ -120,26 +143,6 @@ source $ZSH/oh-my-zsh.sh
  alias ets="ember test --server"
  alias tree="tree -C"
 
- extract() {
-	if [ -f $1 ] ; then
-		case $1 in
-			*.tar.bz2)   tar xjf $1     ;;
-			*.tar.gz)    tar xzf $1     ;;
-			*.bz2)       bunzip2 $1     ;;
-			*.rar)       unrar e $1     ;;
-			*.gz)        gunzip $1      ;;
-			*.tar)       tar xf $1      ;;
-			*.tbz2)      tar xjf $1     ;;
-			*.tgz)       tar xzf $1     ;;
-			*.zip)       unzip $1       ;;
-			*.Z)         uncompress $1  ;;
-			*.7z)        7z x $1        ;;
-			*)     echo "'$1' cannot be extracted via extract()" ;;
-		esac
-	else
-		echo "'$1' is not a valid file"
-	fi
-}
 alias -g G="| egrep -i --color"
 mkcd () { mkdir -p "$@" && cd "$@"; }
 alias c='pygmentize -g'
@@ -148,7 +151,7 @@ alias fpf='greadlink -f'
 # require: brew install coreutils
 
 # https://github.com/supercrabtree/k
-alias ll='k'
+# alias ll='k'
 
 function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
 function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
@@ -245,3 +248,7 @@ export NVM_DIR="$HOME/.nvm"
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# tabtab source for yarn package
+# uninstall by removing these lines or running `tabtab uninstall yarn`
+[[ -f /Users/santiagobandiera/.yarn-cache/.global/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/santiagobandiera/.yarn-cache/.global/node_modules/tabtab/.completions/yarn.zsh
