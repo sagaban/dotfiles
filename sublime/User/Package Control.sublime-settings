@@ -5,6 +5,7 @@
 	],
 	"installed_packages":
 	[
+		"A File Icon",
 		"Alignment",
 		"All Autocomplete",
 		"auto-save",
@@ -12,7 +13,6 @@
 		"Boxy Theme",
 		"Boxy Theme Addon - Font Face",
 		"Boxy Theme Addon - Mono File Icons",
-		"Boxy Theme Addon - Mono File Icons - Light UI",
 		"BracketHighlighter",
 		"Color Highlighter",
 		"Colorsublime",

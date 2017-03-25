@@ -1,4 +1,5 @@
-Package\ Control.cache*
-Package\ Control.last-run
-Package\ Control.merged-ca-bundle
-Package\ Control.system-ca-bundle
+**/User/Package\ Control.cache*
+**/User/Package Control.cache/
+**/User/Package\ Control.last-run
+**/User/Package\ Control.merged-ca-bundle
+**/User/Package\ Control.system-ca-bundle

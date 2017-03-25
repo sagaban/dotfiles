@@ -1,3 +1,4 @@
+export TERM="xterm-256color"
 #  to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -7,6 +8,7 @@ export ZSH=~/.oh-my-zsh
 # time that oh-my-zsh is loaded.
  ZSH_THEME="powerlevel9k/powerlevel9k"
 # ZSH_THEME="muse"
+# POWERLEVEL9K_MODE='awesome-fontconfig'
  POWERLEVEL9K_MODE='awesome-patched'
  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir rbenv vcs)
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
@@ -88,7 +90,7 @@ HIST_STAMPS="dd-mm-yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo z cp zsh-syntax-highlighting command-not-found history yarn extract)
+plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo z cp zsh-syntax-highlighting command-not-found history yarn extract debian)
 
 # User configuration
 
@@ -147,7 +149,7 @@ alias -g G="| egrep -i --color"
 mkcd () { mkdir -p "$@" && cd "$@"; }
 alias c='pygmentize -g'
 #fpf () { echo `pwd`/`ls $@`}
-alias fpf='greadlink -f'
+alias fpf='readlink -f'
 # require: brew install coreutils
 
 # https://github.com/supercrabtree/k
@@ -244,8 +246,8 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-. /usr/local/etc/profile.d/z.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. ~/git-repos/z/z.sh
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
