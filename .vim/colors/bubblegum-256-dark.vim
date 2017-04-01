@@ -1,1 +1,0 @@
-/home/santiago/.vim/bundle/bubblegum/colors/bubblegum-256-dark.vim

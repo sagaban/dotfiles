@@ -94,7 +94,7 @@ plugins=(colored-man-pages git git-flow git-flow-completion history-substring-se
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.local/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=~/.npm-global/bin:$PATH
 
