@@ -2,6 +2,7 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+		"DashDoc"
 	],
 	"installed_packages":
 	[
@@ -9,6 +10,7 @@
 		"Alignment",
 		"All Autocomplete",
 		"auto-save",
+		"Babel",
 		"Better CoffeeScript",
 		"Boxy Theme",
 		"Boxy Theme Addon - Font Face",
@@ -36,6 +38,7 @@
 		"Node Completions",
 		"Package Control",
 		"Pretty JSON",
+		"ReactJS",
 		"Sass",
 		"Seti_UI",
 		"SideBarEnhancements",
