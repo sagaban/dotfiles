@@ -4,7 +4,7 @@
 [push]
 	default = simple
 [core]
-	excludesfile = /Users/santiagobandiera/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 [alias]
 	lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
@@ -40,4 +40,4 @@
 [diff]
 	tool = p4mergetool
 [difftool "p4mergetool"]
-	cmd = /home/santiago/software/p4merge/bin/p4merge $LOCAL $REMOTE
+	cmd = ~/software/p4merge/bin/p4merge $LOCAL $REMOTE
