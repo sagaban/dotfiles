@@ -127,11 +127,13 @@ source $ZSH/oh-my-zsh.sh
  alias ports='netstat -tulanp'
  alias wget='wget -c'
 
- urgarfc() {
+ urgar() {
     egrep -Ri "$1" .
  }
 
- alias urgar=urgarfc
+ alias gcob="git branch | fzf --height 33% --reverse --border | xargs git checkout"
+ alias gcoba="git branch -a| fzf --height 33% --reverse --border | xargs git checkout"
+
  alias buscar='find . | egrep -i --color'
  buscaren (){
      find $0 | egrep -i --color $1
@@ -154,6 +156,8 @@ alias fpf='readlink -f'
 
 # https://github.com/supercrabtree/k
 # alias ll='k'
+# alias ls='~/software/els --els-icons=fontawesome'
+alias ll='ls -l'
 
 function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
 function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
@@ -251,6 +255,14 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# tabtab source for yarn package
-# uninstall by removing these lines or running `tabtab uninstall yarn`
-[[ -f /Users/santiagobandiera/.yarn-cache/.global/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/santiagobandiera/.yarn-cache/.global/node_modules/tabtab/.completions/yarn.zsh
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+	unalias z 2> /dev/null
+	z() {
+	  [ $# -gt 0 ] && _z "$*" && return
+	  cd "$(_z -l 2>&1 | fzf --height 40% --reverse --inline-info +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
+	}
