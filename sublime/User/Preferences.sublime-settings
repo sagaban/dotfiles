@@ -18,7 +18,6 @@
 	"font_size": 12,
 	"ignored_packages":
 	[
-		"DashDoc",
 		"Vintage"
 	],
 	"indent_guide_options":
@@ -44,7 +43,7 @@
 	"theme_config_radio_marked": "☒",
 	"theme_config_radio_unmarked": "☐",
 	"theme_config_unmarked": "✗",
-	"theme_icons_materialized": false,
+	"theme_icons_atomized": true,
 	"theme_scrollbar_colored": true,
 	"theme_sidebar_file_icons_hidden": false,
 	"theme_size_sm": true,
