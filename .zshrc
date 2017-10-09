@@ -133,6 +133,7 @@ source $ZSH/oh-my-zsh.sh
 
  alias gcob="git branch | fzf --height 33% --reverse --border | xargs git checkout"
  alias gcoba="git branch -a| fzf --height 33% --reverse --border | xargs git checkout"
+ alias gcot="git branch --remote| fzf --height 33% --reverse --border | xargs git checkout -t"
 
  alias buscar='find . | egrep -i --color'
  buscaren (){
