@@ -3,5 +3,7 @@
 **/User/Package\ Control.last-run
 **/User/Package\ Control.merged-ca-bundle
 **/User/Package\ Control.system-ca-bundle
+sublime/User/SublimeLinter.sublime-settings
+.fonts/OperatorMono*
 
 *.log

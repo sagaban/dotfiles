@@ -244,6 +244,8 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH="$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools"
 
+export PATH="$PATH:$HOME/.yarn/bin" # Add YARN to PATH for scripting
+
 if test -f ~/.rvm/scripts/rvm; then
    [ "$(type rvm)" = "function" ] || source ~/.rvm/scripts/rvm
 fi
@@ -256,9 +258,9 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
-fi
+# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+#         source /etc/profile.d/vte.sh
+# fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
