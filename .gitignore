@@ -1,9 +1,7 @@
-**/User/Package\ Control.cache**
-**/User/Package Control.cache/
-**/User/Package\ Control.last-run
-**/User/Package\ Control.merged-ca-bundle
-**/User/Package\ Control.system-ca-bundle
 sublime/User/SublimeLinter.sublime-settings
+sublime/User/JavaScript.sublime-settings
+sublime/User/Color Highlighter/*
+sublime/User/Package Control.cache/**
 .fonts/OperatorMono*
 
 *.log
