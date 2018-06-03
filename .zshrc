@@ -90,7 +90,7 @@ HIST_STAMPS="dd-mm-yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo z cp zsh-syntax-highlighting command-not-found history yarn extract debian)
+plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo z cp zsh-syntax-highlighting command-not-found history yarn extract debian docker docker-compose)
 
 # User configuration
 
@@ -124,8 +124,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+ alias ls=exa
  alias ports='netstat -tulanp'
  alias wget='wget -c'
+ alias open=xdg-open
 
  urgar() {
     egrep -Ri "$1" .
@@ -159,9 +161,10 @@ alias fpf='readlink -f'
 # alias ll='k'
 # alias ls='~/software/els --els-icons=fontawesome'
 alias ll='ls -l'
+alias m=micro
 
-function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
-function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
+#function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
+#function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
 function myip() {
     ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
 	ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
@@ -242,7 +245,8 @@ fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-export PATH="$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/platform-tools"
+#export PATH="$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin"
+export PATH="$PATH:$HOME/software/android-studio/bin:$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/tools"
 
 export PATH="$PATH:$HOME/.yarn/bin" # Add YARN to PATH for scripting
 
@@ -258,9 +262,9 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-#         source /etc/profile.d/vte.sh
-# fi
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+		source /etc/profile.d/vte.sh
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
