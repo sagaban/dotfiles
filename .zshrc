@@ -6,6 +6,7 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+# ZSH_THEME="spaceship"
  ZSH_THEME="powerlevel9k/powerlevel9k"
 # ZSH_THEME="muse"
 # POWERLEVEL9K_MODE='awesome-fontconfig'
@@ -83,6 +84,23 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="dd-mm-yyyy"
 
+# HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
+# setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+# setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+# setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+# setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+# setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+# setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+# setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+# setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+# setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+# setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+# setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -90,7 +108,7 @@ HIST_STAMPS="dd-mm-yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git git-flow git-flow-completion history-substring-search zsh-completions sudo z cp zsh-syntax-highlighting command-not-found history yarn extract debian docker docker-compose)
+plugins=(colored-man-pages git git-flow history-substring-search sudo z cp zsh-completions zsh-syntax-highlighting command-not-found history yarn extract debian docker docker-compose)
 
 # User configuration
 
@@ -162,6 +180,7 @@ alias fpf='readlink -f'
 # alias ls='~/software/els --els-icons=fontawesome'
 alias ll='ls -l'
 alias m=micro
+alias rm=trash
 
 #function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
 #function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
@@ -244,9 +263,10 @@ fi
 ###-end-npm-completion-###
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export ANDROID_HOME="$HOME/Android/Sdk"
 
 #export PATH="$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin"
-export PATH="$PATH:$HOME/software/android-studio/bin:$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/tools"
+export PATH="$PATH:$HOME/software/android-studio/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin"
 
 export PATH="$PATH:$HOME/.yarn/bin" # Add YARN to PATH for scripting
 
@@ -273,3 +293,9 @@ fi
 	  [ $# -gt 0 ] && _z "$*" && return
 	  cd "$(_z -l 2>&1 | fzf --height 40% --reverse --inline-info +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
 	}
+
+###-tns-completion-start-###
+if [ -f /home/santiago/.tnsrc ]; then 
+    source /home/santiago/.tnsrc 
+fi
+###-tns-completion-end-###
