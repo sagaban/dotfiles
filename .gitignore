@@ -1,5 +1,7 @@
 sublime/User/Color Highlighter/*
 sublime/User/Package Control.cache/**
 .fonts/OperatorMono*
+sublime/User/Package Control.last-run
+sublime/User/Package Control.merged-ca-bundle
 
 *.log
