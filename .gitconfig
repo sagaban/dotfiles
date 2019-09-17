@@ -12,8 +12,14 @@
 	lg3 = log --graph --full-history --all --color --pretty=format:'%x1b[31m%h%x09%x1b[32m %C(white)- %d%x1b[0m%x20%s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
 	lg4 = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 	lg = !"git lg4"
-    unstage = reset HEAD --
-	workprofile = config user.email \"santi@hanzo.es\"
+  unstage = reset HEAD --
+  pr = "!f() { \
+    (git branch -D pr-$1 || true) && \
+    git fetch upstream pull/$1/head:pr-$1 && \
+    git checkout -B pr_temp && \
+    git merge --no-ff --no-edit pr-$1; \
+    git status; \
+	}; f"
 
 # Setup p4merge as a visual mergetool
 # ----------------------
@@ -42,3 +48,5 @@
 	tool = p4mergetool
 [difftool "p4mergetool"]
 	cmd = ~/software/p4merge/bin/p4merge $LOCAL $REMOTE
+[pull]
+	rebase = true
