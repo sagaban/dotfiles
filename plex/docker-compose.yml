@@ -1,0 +1,16 @@
+version: "3.5"
+
+services:
+  plex:
+    image: plexinc/pms-docker
+    expose:
+      - 32400
+      - 33400
+    hostname: PlexServer
+    volumes:
+      - /home/santiago/.plex:/config
+      - /home/santiago/Vídeos:/media
+    restart: unless-stopped
+    network_mode: host
+
+

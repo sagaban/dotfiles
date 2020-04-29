@@ -159,14 +159,10 @@ source $ZSH/oh-my-zsh.sh
  buscaren (){
      find $0 | egrep -i --color $1
  }
- alias buscarps='ps -A | egrep -i --color'
 
-# Ember CLI
- alias e=ember
- alias es="ember s"
- alias eg="ember g"
- alias ets="ember test --server"
- alias tree="tree -C"
+alias buscarps='ps -A | egrep -i --color'
+
+alias tree="tree -C"
 
 alias -g G="| egrep -i --color"
 mkcd () { mkdir -p "$@" && cd "$@"; }
@@ -179,6 +175,7 @@ alias fpf='readlink -f'
 # alias ll='k'
 # alias ls='~/software/els --els-icons=fontawesome'
 alias ll='ls -l'
+alias la='ll -a'
 alias m=micro
 alias rm=trash
 
@@ -191,6 +188,19 @@ function myip() {
 	ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
 	ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
+
+#sudo () {
+#    local command=$@
+#    read  "YORN_RESP?Shall command $command be executed? (y/N): "
+#    # local YORN_RESP="$(grep -i "[YN]" <<<"${REPLY:0:1}" || echo 'N')"
+#    # echo $YORN_RESP
+#    if [[ "$YORN_RESP" == [Yy] ]]; then
+#        command sudo "$@"
+#    else
+#    	echo "Aborted"
+#        return 1
+#    fi
+#}
 
 s() {
    if [ -z "$1" ]; then
@@ -262,31 +272,19 @@ elif type compctl &>/dev/null; then
 fi
 ###-end-npm-completion-###
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export ANDROID_HOME="$HOME/Android/Sdk"
-
-#export PATH="$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin"
-export PATH="$PATH:$HOME/software/android-studio/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin"
-
 export PATH="$PATH:$HOME/.yarn/bin" # Add YARN to PATH for scripting
-
-if test -f ~/.rvm/scripts/rvm; then
-   [ "$(type rvm)" = "function" ] || source ~/.rvm/scripts/rvm
-fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 . ~/git-repos/z/z.sh
-source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-		source /etc/profile.d/vte.sh
-fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 	unalias z 2> /dev/null
 	z() {
@@ -295,7 +293,16 @@ fi
 	}
 
 ###-tns-completion-start-###
-if [ -f /home/santiago/.tnsrc ]; then 
-    source /home/santiago/.tnsrc 
+if [ -f /home/santiago/.tnsrc ]; then
+    source /home/santiago/.tnsrc
 fi
 ###-tns-completion-end-###
+
+#export PATH="/home/santiago/.pyenv/bin:$PATH"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+
+#export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+#export PATH="/home/santiago/reciprocity/repos/techops/bin:$PATH"
+#export PATH="/home/santiago/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
