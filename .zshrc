@@ -146,6 +146,7 @@ source $ZSH/oh-my-zsh.sh
  alias ports='netstat -tulanp'
  alias wget='wget -c'
  alias open=xdg-open
+ alias df=dfc
 
  urgar() {
     egrep -Ri "$1" .
@@ -298,6 +299,7 @@ if [ -f /home/santiago/.tnsrc ]; then
 fi
 ###-tns-completion-end-###
 
+
 #export PATH="/home/santiago/.pyenv/bin:$PATH"
 #eval "$(pyenv init -)"
 #eval "$(pyenv virtualenv-init -)"
@@ -306,3 +308,16 @@ fi
 #export PATH="/home/santiago/reciprocity/repos/techops/bin:$PATH"
 #export PATH="/home/santiago/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+
+#export PATH="/usr/share/rvm/bin:$PATH"
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+[[ -s "/usr/share/rvm/scripts/rvm" ]] && . "/usr/share/rvm/scripts/rvm"
+#export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+
+# ChefDK embeded Ruby
+# export PATH="/opt/chefdk/embedded/bin:${HOME}/.chefdk/gem/ruby/2.5.0/bin:$PATH"
+# eval "$(chef shell-init zsh)"
+export CHEF_PROFILE=oregon
+
+. /home/santiago/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
+

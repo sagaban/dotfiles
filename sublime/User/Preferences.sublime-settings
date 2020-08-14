@@ -5,7 +5,7 @@
 	"caret_extra_top": 1,
 	"caret_extra_width": 1,
 	"caret_style": "blink",
-	"color_scheme": "Packages/Boxy Theme/schemes/Boxy Tomorrow.tmTheme",
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"fade_fold_buttons": false,
 	"find_selected_text": true,
 	"folder_exclude_patterns":
@@ -18,7 +18,11 @@
 	"font_size": 12,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Boxy Theme",
+		"Boxy Theme Addon - Font Face",
+		"Boxy Theme Addon - Mono File Icons",
+		"Vintage",
+		"Vuetify"
 	],
 	"indent_guide_options":
 	[
