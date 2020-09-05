@@ -53,3 +53,6 @@
 	rebase = true
 [gui]
 	editor = subl
+
+[includeIf "gitdir:~/upWork/repos/"]
+    path = ~/upWork/repos/.gitconfig

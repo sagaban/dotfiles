@@ -308,6 +308,7 @@ fi
 #export PATH="/home/santiago/reciprocity/repos/techops/bin:$PATH"
 #export PATH="/home/santiago/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export KNIFE_HOME=$HOME
 
 #export PATH="/usr/share/rvm/bin:$PATH"
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
