@@ -28,6 +28,8 @@
         "defaults":
         {
             // Put settings here that you want to apply to all profiles.
+            "useAcrylic": true,
+            "acrylicOpacity": 0.8
         },
         "list":
         [
@@ -36,7 +38,8 @@
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "name": "Windows PowerShell",
                 "commandline": "powershell.exe",
-                "hidden": false
+                "hidden": false,
+                "background" : "#0037DA"
             },
             {
                 // Make changes here to the cmd.exe profile.
@@ -57,15 +60,14 @@
                 "name": "Ubuntu-20.04",
                 "source": "Windows.Terminal.Wsl",
                 "startingDirectory": "//wsl$/Ubuntu-20.04/home/santiago/",
-                "acrylicOpacity": 0.8,
                 "colorScheme" : "OneDark",
-                "fontFace" : "Cascadia Code PL",
-                "useAcrylic": true,
+                "fontFace" : "Droid Sans Mono Awesome",
+                "fontSize": 11,
                 "commandline": "wsl.exe byobu"
             }
         ]
     },
-    
+
     "multiLinePasteWarning": false,
 
 
@@ -74,13 +76,10 @@
     "schemes": [
         {
             "name" : "Campbell",
-        
             "cursorColor": "#FFFFFF",
             "selectionBackground": "#FFFFFF",
-        
             "background" : "#0C0C0C",
             "foreground" : "#CCCCCC",
-        
             "black" : "#0C0C0C",
             "blue" : "#0037DA",
             "cyan" : "#3A96DD",
@@ -118,8 +117,8 @@
             "brightWhite": "#ffffff",
             "background": "#090909",
             "foreground": "#cdcdcd"
-          },
-          {
+        },
+        {
             "name": "DotGov",
             "black": "#191919",
             "red": "#bf091d",
@@ -139,8 +138,8 @@
             "brightWhite": "#ffffff",
             "background": "#262c35",
             "foreground": "#ebebeb"
-          },
-          {
+        },
+        {
             "name": "OneDark",
             "black": "#1e2127",
             "red": "#e06c75",
@@ -160,8 +159,8 @@
             "brightWhite": "#ffffff",
             "background": "#1e2127",
             "foreground": "#abb2bf"
-          },
-          {
+        },
+        {
             "name": "Subliminal",
             "black": "#7f7f7f",
             "red": "#e15a60",
@@ -181,7 +180,7 @@
             "brightWhite": "#d4d4d4",
             "background": "#282c35",
             "foreground": "#d4d4d4"
-          }
+        }
     ],
 
     // Add custom keybindings to this array.
@@ -205,4 +204,3 @@
         { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" }
     ]
 }
-
