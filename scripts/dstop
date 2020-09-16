@@ -1,0 +1,31 @@
+#!/bin/bash
+
+containers_ids=$(docker ps | awk '/Up/ {print $1}')
+containers_names=$(docker ps | awk '/Up/ {print $2}')
+
+
+cmd=(dialog --separate-output --checklist "Select options:" 22 56 16)
+
+options=()
+i=0
+for name in ${containers_names//\\n/ }
+do
+    options+=($i $name off)
+    # echo $i
+    i=$(expr $i + 1)
+done
+
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+
+# echo "containers_ids $containers_ids"
+
+ids_array=(${containers_ids//\\n/ })
+
+# echo ${ids_array[0]}
+
+for choice in $choices
+do
+    # echo ${ids_array[$choice]}
+    docker stop ${ids_array[$choice]}
+done
