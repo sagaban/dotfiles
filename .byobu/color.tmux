@@ -1,4 +1,4 @@
-BYOBU_DARK="\#a8cb8e"
+BYOBU_DARK="\#be4a46"
 BYOBU_LIGHT=black
 BYOBU_ACCENT=magenta
 BYOBU_HIGHLIGHT=red
