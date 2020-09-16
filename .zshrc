@@ -112,7 +112,7 @@ plugins=(colored-man-pages git git-flow history-substring-search sudo z cp zsh-c
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.local/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.local/bin:/home/santiago/.local/scripts:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=~/.npm-global/bin:$PATH
 

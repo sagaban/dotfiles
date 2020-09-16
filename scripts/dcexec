@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "Select the instance to exec passed arguments"
+
+
+container=$(docker-compose ps | awk '/Up/ {print $1}' | fzf --reverse --height 50%  --bind 'enter:execute(echo {})+abort')
+
+# echo "$container"
+
+if [ -z "$container" ];
+then
+    echo "No container selected"
+else
+    docker exec -ti $container $@
+fi
+
