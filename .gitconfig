@@ -56,3 +56,6 @@
 
 [includeIf "gitdir:~/upWork/repos/"]
     path = ~/upWork/repos/.gitconfig
+
+[includeIf "gitdir:~/dickeys/repos/"]
+path = ~/dickeys/repos/.gitconfig

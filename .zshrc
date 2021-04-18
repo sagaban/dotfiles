@@ -6,11 +6,12 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="spaceship"
- ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 # ZSH_THEME="muse"
-# POWERLEVEL9K_MODE='awesome-fontconfig'
- POWERLEVEL9K_MODE='awesome-patched'
+
+# POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_MODE='nerdfont-complete'
+
  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir rbenv vcs)
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
@@ -183,12 +184,13 @@ alias rm=trash
 #function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
 #function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
 function myip() {
-    ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
-	ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-}
+#    ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+#	ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+#	ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+#	ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+#	ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig wlp2s0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "wlp2s0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	}
 
 #sudo () {
 #    local command=$@
@@ -217,6 +219,12 @@ r() {
       echo "$(cat ~/.save_dir/$1)" ;
    fi
 }
+
+fuction sfpf() {
+	fpf $1 | xclip -sel clip;	
+}
+
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 ###-begin-npm-completion-###
@@ -308,7 +316,7 @@ fi
 #export PATH="/home/santiago/reciprocity/repos/techops/bin:$PATH"
 #export PATH="/home/santiago/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export KNIFE_HOME=$HOME
+#export KNIFE_HOME=$HOME
 
 #export PATH="/usr/share/rvm/bin:$PATH"
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
@@ -322,3 +330,5 @@ export CHEF_PROFILE=oregon
 
 . /home/santiago/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
 
+
+source /home/santiago/.config/broot/launcher/bash/br
