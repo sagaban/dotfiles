@@ -83,7 +83,8 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="dd-mm-yyyy"
+# HIST_STAMPS="dd-mm-yyyy" # this does NOT work
+HIST_STAMPS="%d/%m/%y %T"
 
 # HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
@@ -109,7 +110,7 @@ setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git git-flow history-substring-search sudo z cp zsh-completions zsh-syntax-highlighting command-not-found history yarn extract debian docker docker-compose)
+plugins=(colored-man-pages git git-flow history-substring-search sudo z cp zsh-completions zsh-syntax-highlighting command-not-found history yarn extract debian docker docker-compose copypath)
 
 # User configuration
 
@@ -192,6 +193,19 @@ function myip() {
 	ifconfig wlp2s0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "wlp2s0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
 	}
 
+function usd() {
+   amount=${1:-1}
+   usd=$(curl https://static.coins.infobae.com/cotizacion-simple/dolar-libre-riesgo.json -s | jq -r '.items[1].unico')
+   echo $((usd * amount))
+}
+
+function eur() {
+   usd="$(usd $1)"
+   e=$(sed 's/\..*//' <<< $(curl https://api-dolar-argentina.herokuapp.com/api/euro/nacion -s | jq -r '.venta'))
+   u=$(sed 's/\..*//' <<< $(curl https://api-dolar-argentina.herokuapp.com/api/nacion -s | jq -r '.venta'))
+   echo $((usd * e / u))
+}
+
 #sudo () {
 #    local command=$@
 #    read  "YORN_RESP?Shall command $command be executed? (y/N): "
@@ -220,9 +234,22 @@ r() {
    fi
 }
 
-fuction sfpf() {
-	fpf $1 | xclip -sel clip;	
+function sfpf() {
+	fpf $1 | xclip -sel clip;
 }
+
+function dev() {
+   if [ -f "./package-lock.json" ]
+   then
+      npm run dev
+   fi
+   if [ -f "./yarn.lock" ]
+   then
+      yarn dev
+   fi
+}
+
+
 
 
 ### Added by the Heroku Toolbelt
@@ -319,16 +346,35 @@ export PATH="$HOME/.cargo/bin:$PATH"
 #export KNIFE_HOME=$HOME
 
 #export PATH="/usr/share/rvm/bin:$PATH"
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [[ -s "/usr/share/rvm/scripts/rvm" ]] && . "/usr/share/rvm/scripts/rvm"
 #export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
-# ChefDK embeded Ruby
-# export PATH="/opt/chefdk/embedded/bin:${HOME}/.chefdk/gem/ruby/2.5.0/bin:$PATH"
-# eval "$(chef shell-init zsh)"
-export CHEF_PROFILE=oregon
 
 . /home/santiago/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
 
 
 source /home/santiago/.config/broot/launcher/bash/br
+
+if command -v theme.sh > /dev/null; then
+	[ -e ~/.theme_history ] && theme.sh "$(theme.sh -l|tail -n1)"
+
+	# Optional
+
+	# Bind C-o to the last theme.
+	last_theme() {
+		theme.sh "$(theme.sh -l|tail -n2|head -n1)"
+	}
+
+	zle -N last_theme
+	bindkey '^O' last_theme
+
+	alias th='theme.sh -i'
+
+	# Interactively load a light theme
+	alias thl='theme.sh --light -i'
+
+	# Interactively load a dark theme
+	alias thd='theme.sh --dark -i'
+fi
+source /home/santiago/.npm-run.plugin.zsh/npm-run.plugin.zsh
