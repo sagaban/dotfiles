@@ -1,3 +1,4 @@
+# zmodload zsh/zprof # then run `zprof`
 export TERM="xterm-256color"
 #  to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -106,15 +107,25 @@ setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git git-flow history-substring-search sudo z cp zsh-completions zsh-syntax-highlighting command-not-found history yarn extract debian docker docker-compose copypath)
+plugins=(colored-man-pages git history-substring-search sudo z cp zsh-completions zsh-syntax-highlighting command-not-found history yarn extract debian docker docker-compose copypath)
+
+# removed plugins and thier config
+## zsh-nvm
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+
+#removed
+# plugins=(zsh-nvm)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.local/bin:/home/santiago/.local/scripts:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.local/bin:/home/santiago/.local/scripts:/home/santiago/.local/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=~/.npm-global/bin:$PATH
 
@@ -144,23 +155,30 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
- alias ls=exa
+
+#  alias ls=exa
+ alias ls=lsd
  alias ports='netstat -tulanp'
  alias wget='wget -c'
  alias open=xdg-open
- alias df=dfc
+# alias df=dfc
+ alias df=duf
+
 
  urgar() {
-    egrep -Ri "$1" .
+   #  egrep -Ri "$1" .
+   grep -rnw . -e "$1"
  }
 
  alias gcob="git branch | fzf --height 33% --reverse --border | xargs git checkout"
  alias gcoba="git branch -a| fzf --height 33% --reverse --border | xargs git checkout"
  alias gcot="git branch --remote| fzf --height 33% --reverse --border | xargs git checkout -t"
 
- alias buscar='find . | egrep -i --color'
+ #alias buscar='find . | egrep -i --color'
+alias buscar='fd -H'
+
  buscaren (){
-     find $0 | egrep -i --color $1
+     fd -H $0 | egrep -i --color $1
  }
 
 alias buscarps='ps -A | egrep -i --color'
@@ -181,6 +199,7 @@ alias ll='ls -l'
 alias la='ll -a'
 alias m=micro
 alias rm=trash
+alias nukedocker="docker-compose down --rmi all -v --remove-orphans"
 
 #function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
 #function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
@@ -195,7 +214,7 @@ function myip() {
 
 function usd() {
    amount=${1:-1}
-   usd=$(curl https://static.coins.infobae.com/cotizacion-simple/dolar-libre-riesgo.json -s | jq -r '.items[1].unico')
+   usd=$(curl https://static.coins.infobae.com/cotizacion-simple/dolar-libre-riesgo.json -s | jq -r '.items[2].unico')
    echo $((usd * amount))
 }
 
@@ -205,19 +224,6 @@ function eur() {
    u=$(sed 's/\..*//' <<< $(curl https://api-dolar-argentina.herokuapp.com/api/nacion -s | jq -r '.venta'))
    echo $((usd * e / u))
 }
-
-#sudo () {
-#    local command=$@
-#    read  "YORN_RESP?Shall command $command be executed? (y/N): "
-#    # local YORN_RESP="$(grep -i "[YN]" <<<"${REPLY:0:1}" || echo 'N')"
-#    # echo $YORN_RESP
-#    if [[ "$YORN_RESP" == [Yy] ]]; then
-#        command sudo "$@"
-#    else
-#    	echo "Aborted"
-#        return 1
-#    fi
-#}
 
 s() {
    if [ -z "$1" ]; then
@@ -248,8 +254,7 @@ function dev() {
       yarn dev
    fi
 }
-
-
+alias xcd='cd "$(xplr --print-pwd-as-result)"'
 
 
 ### Added by the Heroku Toolbelt
@@ -310,6 +315,10 @@ fi
 
 export PATH="$PATH:$HOME/.yarn/bin" # Add YARN to PATH for scripting
 
+# Hack
+export FONTAWESOME_NPM_AUTH_TOKEN="D7725E95-A9B3-45D0-89CF-1F6B42E8C195"
+
+# https://github.com/lukechilds/zsh-nvm plugin does not work with npx
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -320,38 +329,23 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-#source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
-	unalias z 2> /dev/null
-	z() {
-	  [ $# -gt 0 ] && _z "$*" && return
-	  cd "$(_z -l 2>&1 | fzf --height 40% --reverse --inline-info +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
-	}
-
-###-tns-completion-start-###
-if [ -f /home/santiago/.tnsrc ]; then
-    source /home/santiago/.tnsrc
-fi
-###-tns-completion-end-###
+unalias z 2> /dev/null
+z() {
+   [ $# -gt 0 ] && _z "$*" && return
+   cd "$(_z -l 2>&1 | fzf --height 40% --reverse --inline-info +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
+}
 
 
-#export PATH="/home/santiago/.pyenv/bin:$PATH"
-#eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
 
-#export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-#export PATH="/home/santiago/reciprocity/repos/techops/bin:$PATH"
-#export PATH="/home/santiago/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-#export KNIFE_HOME=$HOME
 
-#export PATH="/usr/share/rvm/bin:$PATH"
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [[ -s "/usr/share/rvm/scripts/rvm" ]] && . "/usr/share/rvm/scripts/rvm"
-#export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
-
-. /home/santiago/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
+. /home/santiago/.local/lib/python3.10/site-packages/powerline/bindings/zsh/powerline.zsh
 
 
 source /home/santiago/.config/broot/launcher/bash/br
@@ -377,4 +371,12 @@ if command -v theme.sh > /dev/null; then
 	# Interactively load a dark theme
 	alias thd='theme.sh --dark -i'
 fi
-source /home/santiago/.npm-run.plugin.zsh/npm-run.plugin.zsh
+
+# source /home/santiago/.npm-run.plugin.zsh/npm-run.plugin.zsh
+
+# bun completions
+[ -s "/home/santiago/.bun/_bun" ] && source "/home/santiago/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
