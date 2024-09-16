@@ -20,7 +20,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # POWERLEVEL9K_MODE='awesome-patched'
 POWERLEVEL9K_MODE='nerdfont-complete'
 
- POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir rbenv vcs)
+ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon virtualenv dir rbenv vcs)
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 # show the commit number
@@ -41,6 +41,8 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
  POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='none'
  POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='blue'
  POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='none'
+ POWERLEVEL9K_VIRTUALENV_FOREGROUND='salmon1'
+ POWERLEVEL9K_VIRTUALENV_BACKGROUND='none'
  POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
  POWERLEVEL9K_VCS_CLEAN_BACKGROUND='none'
  POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='yellow'
@@ -97,6 +99,11 @@ HIST_STAMPS="%d/%m/%y %T"
 # HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
 SAVEHIST=10000000
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
+
+
 # setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 # setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 # setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
@@ -120,7 +127,7 @@ setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git history-substring-search sudo z cp zsh-completions zsh-syntax-highlighting command-not-found history yarn extract debian docker docker-compose copypath)
+plugins=(colored-man-pages git history-substring-search sudo z cp zsh-completions command-not-found history extract debian docker docker-compose copypath virtualenv zsh-autosuggestions zsh-syntax-highlighting)
 
 # removed plugins and thier config
 ## zsh-nvm
@@ -132,7 +139,7 @@ plugins=(colored-man-pages git history-substring-search sudo z cp zsh-completion
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.local/bin:/home/santiago/.local/scripts:/home/santiago/.local/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.local/bin:/Users/santiago/.local/scripts:/Users/santiago/.local/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=~/.npm-global/bin:$PATH
 
@@ -167,7 +174,7 @@ source $ZSH/oh-my-zsh.sh
  alias ls=lsd
  alias ports='netstat -tulanp'
  alias wget='wget -c'
- alias open=xdg-open
+# alias open=xdg-open # This is for linux
 # alias df=dfc
  alias df=duf
 
@@ -181,6 +188,8 @@ source $ZSH/oh-my-zsh.sh
  alias gcoba="git branch -a| fzf --height 33% --reverse --border | xargs git checkout"
  alias gcot="git branch --remote| fzf --height 33% --reverse --border | xargs git checkout -t"
  alias gc-="git checkout -- ."
+ alias gbdas='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
+'
 
  #alias buscar='find . | egrep -i --color'
 alias buscar='fd -H'
@@ -207,7 +216,7 @@ alias ll='ls -l'
 alias la='ll -a'
 alias m=micro
 alias rm=trash
-alias nukedocker="docker-compose down --rmi all -v --remove-orphans"
+alias nukedocker="docker compose down --rmi all -v --remove-orphans"
 
 #function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
 #function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
@@ -252,21 +261,30 @@ function sfpf() {
 	fpf $1 | xclip -sel clip;
 }
 
-function dev() {
-   if [ -f "./package-lock.json" ]
-   then
-      npm run dev
+# jsut use https://www.npmjs.com/package/@antfu/ni
+# function dev() {
+#    if [ -f "./package-lock.json" ]
+#    then
+#       npm run dev
+#    fi
+#    if [ -f "./yarn.lock" ]
+#    then
+#       yarn dev
+#    fi
+# }
+
+
+# alias xcd='cd "$(xplr --print-pwd-as-result)"'
+
+function yy() {
+   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+   yazi "$@" --cwd-file="$tmp"
+   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+      builtin cd -- "$cwd"
    fi
-   if [ -f "./yarn.lock" ]
-   then
-      yarn dev
-   fi
+   rm -f -- "$tmp"
 }
-alias xcd='cd "$(xplr --print-pwd-as-result)"'
 
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
 ###-begin-npm-completion-###
 #
 # npm command completion script
@@ -337,8 +355,10 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+
+# mac complains
+# source /usr/share/doc/fzf/examples/key-bindings.zsh
+# source /usr/share/doc/fzf/examples/completion.zsh
 
 unalias z 2> /dev/null
 z() {
@@ -357,7 +377,8 @@ if [ -f /usr/share/powerline/bindings/zsh/powerline.zsh ]; then
    source /usr/share/powerline/bindings/zsh/powerline.zsh
 fi
 
-source /home/santiago/.config/broot/launcher/bash/br
+# macs complains
+# source /home/satiago/.config/broot/launcher/bash/br
 
 if command -v theme.sh > /dev/null; then
 	[ -e ~/.theme_history ] && theme.sh "$(theme.sh -l|tail -n1)"
@@ -403,3 +424,17 @@ eval "$(fnm env --use-on-cd)"
 #		xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
 #fi
 # }}}
+
+# fnm
+export PATH="/Users/santiago/Library/Application Support/fnm:$PATH"
+eval "`fnm env`"
+
+source /Users/santiago/.config/broot/launcher/bash/br
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+
+eval "$(atuin init zsh)"
+#eval "$(pyenv virtualenv-init -)"
