@@ -4,7 +4,7 @@
 [push]
 	default = simple
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/santiago/.gitignore_global
 	editor = micro
 	pager = delta --line-numbers --dark
 [alias]
@@ -23,14 +23,6 @@
 #	}; f"
 
 #  spr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull-requests/$1/from:pr/$1 && git checkout pr/$1; }; f"
-
- pr = "!f() { \
-   (git branch -D pr-$1 || true) && \
-   git fetch origin pull-requests/$1/from:pr-$1 && \
-   git checkout -B pr_temp && \
-   git merge --no-ff --no-edit pr-$1; \
-   git status; \
-}; f"
 
 
 # Setup p4merge as a visual mergetool
@@ -54,20 +46,23 @@
 #  conflictstyle = diff3
 
 [mergetool "p4mergetool"]
-	cmd = /home/santiago/software/p4merge/bin/p4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
+#	cmd = /home/santiago/software/p4merge/bin/p4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
+
 	trustExitCode = false
 [mergetool]
 	keepBackup = false
 [diff]
 	tool = p4mergetool
-  colorMoved = default
+    colorMoved = default
 	# external = difft
 [difftool "p4mergetool"]
-	cmd = ~/software/p4merge/bin/p4merge $LOCAL $REMOTE
+#	cmd = ~/software/p4merge/bin/p4merge $LOCAL $REMOTE
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
 [pull]
 	rebase = true
 [gui]
-	editor = subl
+	editor = /usr/local/bin/zed
 
 [includeIf "gitdir:~/concntric/repos/"]
 	path = ~/concntric/repos/.gitconfig
@@ -80,3 +75,11 @@
 
 [delta]
   navigate = true    # use n and N to move between diff sections
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/santiago/.stCommitMsg

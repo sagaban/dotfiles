@@ -6,7 +6,8 @@
 # fi
 
 # zmodload zsh/zprof # then run `zprof`
-export TERM="xterm-256color"
+#
+# export TERM="xterm-256color"
 #  to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -188,8 +189,8 @@ source $ZSH/oh-my-zsh.sh
  alias gcoba="git branch -a| fzf --height 33% --reverse --border | xargs git checkout"
  alias gcot="git branch --remote| fzf --height 33% --reverse --border | xargs git checkout -t"
  alias gc-="git checkout -- ."
- alias gbdas='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
-'
+#  alias gbdas='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
+# ' # --> gbda from git plugin
 
  #alias buscar='find . | egrep -i --color'
 alias buscar='fd -H'
@@ -438,3 +439,11 @@ export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
 eval "$(atuin init zsh)"
 #eval "$(pyenv virtualenv-init -)"
+
+# pnpm
+export PNPM_HOME="/Users/santiago/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
