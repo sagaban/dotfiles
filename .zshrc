@@ -15,55 +15,53 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="powerlevel9k/powerlevel9k"
+#
 # ZSH_THEME="muse"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
 
-# POWERLEVEL9K_MODE='awesome-patched'
-POWERLEVEL9K_MODE='nerdfont-complete'
+# POWERLEVEL9K_MODE='nerdfont-complete'
 
- POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon virtualenv dir rbenv vcs)
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_commit node_version battery history time)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-# show the commit number
- POWERLEVEL9K_SHOW_CHANGESET=false
- POWERLEVEL9K_CUSTOM_COMMIT="zsh_show_current_commit"
- POWERLEVEL9K_CUSTOM_COMMIT_BACKGROUND="magenta"
- POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="black"
- # POWERLEVEL9K_COLOR_SCHEME="light"
- POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon virtualenv dir rbenv vcs)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+# # show the commit number
+#  POWERLEVEL9K_SHOW_CHANGESET=false
+#  POWERLEVEL9K_CUSTOM_COMMIT="zsh_show_current_commit"
+#  POWERLEVEL9K_CUSTOM_COMMIT_BACKGROUND="magenta"
+#  POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="black"
+#  POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 
-# I make it with no background
- POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
- POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
- POWERLEVEL9K_OS_ICON_BACKGROUND="none"
- POWERLEVEL9K_DIR_HOME_FOREGROUND='blue'
- POWERLEVEL9K_DIR_HOME_BACKGROUND='none'
- POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='blue'
- POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='none'
- POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='blue'
- POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='none'
- POWERLEVEL9K_VIRTUALENV_FOREGROUND='salmon1'
- POWERLEVEL9K_VIRTUALENV_BACKGROUND='none'
- POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
- POWERLEVEL9K_VCS_CLEAN_BACKGROUND='none'
- POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='yellow'
- POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='none'
- POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
- POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='none'
- POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
- POWERLEVEL9K_VCS_CLEAN_BACKGROUND='none'
- POWERLEVEL9K_CUSTOM_COMMIT_BACKGROUND="none"
- POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="magenta"
- POWERLEVEL9K_NODE_VERSION_BACKGROUND="none"
- POWERLEVEL9K_NODE_VERSION_FOREGROUND="green"
- POWERLEVEL9K_STATUS_OK_BACKGROUND="none"
- POWERLEVEL9K_STATUS_ERROR_BACKGROUND="none"
+# # I make it with no background
+#  POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
+#  POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+#  POWERLEVEL9K_OS_ICON_BACKGROUND="none"
+#  POWERLEVEL9K_DIR_HOME_FOREGROUND='blue'
+#  POWERLEVEL9K_DIR_HOME_BACKGROUND='none'
+#  POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='blue'
+#  POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='none'
+#  POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='blue'
+#  POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='none'
+#  POWERLEVEL9K_VIRTUALENV_FOREGROUND='salmon1'
+#  POWERLEVEL9K_VIRTUALENV_BACKGROUND='none'
+#  POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
+#  POWERLEVEL9K_VCS_CLEAN_BACKGROUND='none'
+#  POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='yellow'
+#  POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='none'
+#  POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
+#  POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='none'
+#  POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
+#  POWERLEVEL9K_VCS_CLEAN_BACKGROUND='none'
+#  POWERLEVEL9K_CUSTOM_COMMIT_BACKGROUND="none"
+#  POWERLEVEL9K_CUSTOM_COMMIT_FOREGROUND="magenta"
+#  POWERLEVEL9K_NODE_VERSION_BACKGROUND="none"
+#  POWERLEVEL9K_NODE_VERSION_FOREGROUND="green"
+#  POWERLEVEL9K_STATUS_OK_BACKGROUND="none"
+#  POWERLEVEL9K_STATUS_ERROR_BACKGROUND="none"
 
- zsh_show_current_commit(){
-   if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1; then
-      git log -1 --pretty=oneline | cut -c -8
-   fi
-}
+#  zsh_show_current_commit(){
+#    if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1; then
+#       git log -1 --pretty=oneline | cut -c -8
+#    fi
+# }
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -191,6 +189,8 @@ source $ZSH/oh-my-zsh.sh
  alias gc-="git checkout -- ."
 #  alias gbdas='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
 # ' # --> gbda from git plugin
+#  alias zj="zellij list-sessions | fzf --height 33% --reverse --border --ansi|cut -f 1 -d ' ' | xargs -n 1 -I session zellij attach session"
+alias ignored='git ls-files -v | grep "^[[:lower:]]"' # show files marked as unchaged
 
  #alias buscar='find . | egrep -i --color'
 alias buscar='fd -H'
@@ -284,6 +284,18 @@ function yy() {
       builtin cd -- "$cwd"
    fi
    rm -f -- "$tmp"
+}
+
+function zj() {
+   ZJ_SESSIONS=$(zellij list-sessions)
+   NO_SESSIONS=$(echo "${ZJ_SESSIONS}" | wc -l)
+
+   if [ "${NO_SESSIONS}" -ge 2 ]; then
+      zellij attach \
+      "$(echo "${ZJ_SESSIONS}" | sk --ansi --height 33% --border | cut -f 1 -d ' ')"
+   else
+      zellij attach -c
+   fi
 }
 
 ###-begin-npm-completion-###
@@ -447,3 +459,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/atomic.omp.json) "
+fi

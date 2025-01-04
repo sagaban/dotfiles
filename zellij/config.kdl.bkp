@@ -3,13 +3,6 @@ keybinds {
     normal {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
-        bind "F2" { NewTab; SwitchToMode "Normal"; }
-        bind "F3" { GoToPreviousTab; }
-        bind "F4" { GoToNextTab; }
-        bind "Ctrl F2" { NewPane "Right"; SwitchToMode "Normal"; }
-        bind "Alt F2" { NewPane "Down"; SwitchToMode "Normal"; }
-        bind "Alt F3" { MoveTab "Left"; }
-        bind "Alt F4" { MoveTab "Right"; }
     }
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
@@ -313,29 +306,10 @@ load_plugins {
 //     }
 // }
 
-themes {
-    santiago-dark {
-        fg 206 206 206
-        bg 80 73 69
-        black 60 56 54
-        red 226 93 86
-        blue 152 151 26
-        yellow 215 153 33
-        green 36 172 221
-        magenta 177 98 134
-        cyan 104 157 106
-        white 251 241 199
-        orange 214 93 14
-    }
-}
-
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
 // theme "default"
-//theme "tokyo-night-storm"
-theme "santiago-dark"
-
 
 // The name of the default layout to load on startup
 // Default: "default"
@@ -366,8 +340,6 @@ theme "santiago-dark"
 // Default value: 10000
 //
 // scroll_buffer_size 10000
-scroll_buffer_size 100000
-
 
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
