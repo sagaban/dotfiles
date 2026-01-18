@@ -19,6 +19,8 @@ export ZSH=~/.oh-my-zsh
 # ZSH_THEME="muse"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
 
+# Use oh-my-posh for theming
+
 # POWERLEVEL9K_MODE='nerdfont-complete'
 
 # POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon virtualenv dir rbenv vcs)
@@ -222,13 +224,12 @@ alias nukedocker="docker compose down --rmi all -v --remove-orphans"
 #function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; killall Finder;}
 #function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; killall Finder;}
 function myip() {
-#    ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
-#	ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-#	ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-#	ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-#	ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig wlp2s0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "wlp2s0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	}
+    echo "🌐 Public IP:"
+    curl -s ifconfig.me
+    echo ""
+    echo "🏠 Local IP:"
+    ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' | head -1
+}
 
 function usd() {
    amount=${1:-1}
@@ -443,14 +444,18 @@ export PATH="/Users/santiago/Library/Application Support/fnm:$PATH"
 eval "`fnm env`"
 
 source /Users/santiago/.config/broot/launcher/bash/br
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+
+## PyEnv
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+
+# ??
+# eval "$(pyenv virtualenv-init -)"
+
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
-eval "$(atuin init zsh)"
-#eval "$(pyenv virtualenv-init -)"
 
 # pnpm
 export PNPM_HOME="/Users/santiago/Library/pnpm"
@@ -460,6 +465,24 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/atomic.omp.json) "
 fi
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+# Add custom scripts directory to PATH
+export PATH="$HOME/bin:$PATH"
+
+# eval "$(atuin init zsh)"
+# . "$HOME/.atuin/bin/env"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/santiago/.lmstudio/bin"
+# End of LM Studio CLI section
+
+# Didn't work
+# source ~/.config/fzf-navigator.sh
+
+# Add Homebrew library path for WeasyPrint/GTK
+export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
